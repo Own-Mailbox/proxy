@@ -1,4 +1,4 @@
-FROM debian:jessie-backports
+FROM ubuntu:16.04
 
 ENV container docker
 # Don't start any optional services except for the few we need.

@@ -1,11 +1,12 @@
 #!/bin/bash -xe
 
+DBUSER=proxy
+DBPASS=$(mcookie | head -c 16)
+DBNAME=proxy
+
 ### create the database and user
 mysql='mysql --defaults-file=/etc/mysql/debian.cnf'
 $mysql < db.sql
-$DBUSER=proxy
-$DBPASS=$(mcookie | head -c 16)
-$DBNAME=proxy
 $mysql -e "GRANT ALL ON proxy.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';"
 
 ### install sni2torproxy

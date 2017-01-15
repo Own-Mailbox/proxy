@@ -1,8 +1,7 @@
 #!/bin/bash -xe
 
-DBUSER=proxy
-DBPASS=$(mcookie | head -c 16)
-DBNAME=proxy
+### get $DBUSER, $DBPASS, etc.
+source /proxy/settings.sh
 
 ### create the database and user
 mysql='mysql --defaults-file=/etc/mysql/debian.cnf'

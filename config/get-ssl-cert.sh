@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-### get DOMAIN and GMAIL_ADDRESS
+### get DOMAIN and EMAIL
 source /proxy/settings.sh
 
 # install certbot (for getting ssl certs with letsencrypt)
@@ -25,7 +25,7 @@ a2enconf letsencrypt
 service apache2 reload
 
 # get a ssl cert
-certbot certonly --webroot -m $GMAIL_ADDRESS --agree-tos -w /var/www -d $DOMAIN
+certbot certonly --webroot -m $EMAIL --agree-tos -w /var/www -d $DOMAIN
 
 # fix the apache configuration of schooltool to use the new ssl cert
 certdir=/etc/letsencrypt/live/$DOMAIN

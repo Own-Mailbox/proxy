@@ -1,5 +1,5 @@
-DOMAIN=omb1.one
-EMAIL=own-mailbox@gmail.com
+DOMAIN=proxy.omb1.one
+EMAIL=contact@own-mailbox.com
 
 DBUSER=proxy
 DBPASS=$(mcookie | head -c 16)

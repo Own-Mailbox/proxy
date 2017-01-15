@@ -27,9 +27,9 @@ service apache2 reload
 # get a ssl cert
 certbot certonly --webroot -m $EMAIL --agree-tos -w /var/www -d $DOMAIN
 
-# fix the apache configuration of schooltool to use the new ssl cert
+# fix the apache configuration to use the new ssl cert
 certdir=/etc/letsencrypt/live/$DOMAIN
-sed -i /etc/apache2/sites-available/moodle.conf -r \
+sed -i /etc/apache2/sites-available/default.conf -r \
     -e "s|#?SSLCertificateFile .*|SSLCertificateFile      $certdir/cert.pem|" \
     -e "s|#?SSLCertificateKeyFile .*|SSLCertificateKeyFile   $certdir/privkey.pem|" \
     -e "s|#?SSLCertificateChainFile .*|SSLCertificateChainFile $certdir/chain.pem|"

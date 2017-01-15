@@ -6,7 +6,7 @@ DBNAME=proxy
 
 ### create the database and user
 mysql='mysql --defaults-file=/etc/mysql/debian.cnf'
-$mysql < db.sql
+$mysql < config/db.sql
 $mysql -e "GRANT ALL ON proxy.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';"
 
 ### install sni2torproxy
@@ -22,7 +22,7 @@ make install
 cd /root/
 git clone https://github.com/pparent76/Own-Mailbox_Client-Server_Commnucation.git
 mkdir /var/www/html/request-omb
-cp Own-Mailbox_Client-Server_Commnucation/server/* /var/www/html/request-omb/*
+cp Own-Mailbox_Client-Server_Commnucation/server/* /var/www/html/request-omb/
 # create and copy your global_variables.php in /var/www/html/request-omb/
 
 ### Configure postfix.
@@ -50,7 +50,7 @@ git clone https://github.com/pparent76/postfix-smpt2tor-relay.git
 a2enmod ssl
 a2dissite "*"
 rm /etc/apache2/sites-available/*
-cp /host/apache2.conf /etc/apache2/sites-available/default
+cp /host/config/apache2.conf /etc/apache2/sites-available/default
 a2ensite default
 service apache2 restart
 
@@ -72,7 +72,7 @@ chmod +x /etc/rc.local
 ### Setup iptables
 iptables -F
 ip6tables -F
-/host/setup-iptables.sh
+/host/config/setup-iptables.sh
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 

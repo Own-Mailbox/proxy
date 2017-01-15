@@ -26,6 +26,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
         libudns-dev pkg-config fakeroot libmysqlclient-dev \
         mysql-server postfix postfix-mysql apache2 bind9
 
-#COPY postfix.init.d /etc/init.d/postfix
+#COPY config/postfix.init.d /etc/init.d/postfix
 
 

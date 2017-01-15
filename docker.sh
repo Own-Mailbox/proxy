@@ -55,8 +55,8 @@ cmd_create() {
         --tmpfs /run --tmpfs /run/lock \
         -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
         -v "$(pwd)":/host -w /host \
+        -p 80:80 -p 443:443 \
         $IMAGE
-        #-p 80:80 -p 443:443 \
         #--cap-add SYS_ADMIN --cap-add=NET_ADMIN \
 }
 

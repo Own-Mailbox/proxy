@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 ### get DOMAIN and GMAIL_ADDRESS
-source /host/settings.sh
+source /proxy/settings.sh
 
 # install certbot (for getting ssl certs with letsencrypt)
 wget https://dl.eff.org/certbot-auto

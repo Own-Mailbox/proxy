@@ -54,7 +54,7 @@ cmd_create() {
         --cap-add ALL --privileged=true \
         --tmpfs /run --tmpfs /run/lock \
         -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-        -v "$(pwd)":/host -w /host \
+        -v "$(pwd)":/proxy -w /proxy \
         -p 80:80 -p 443:443 \
         $IMAGE
         #--cap-add SYS_ADMIN --cap-add=NET_ADMIN \

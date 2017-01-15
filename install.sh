@@ -50,7 +50,7 @@ git clone https://github.com/pparent76/postfix-smpt2tor-relay.git
 a2enmod ssl
 a2dissite "*"
 rm /etc/apache2/sites-available/*
-cp /host/config/apache2.conf /etc/apache2/sites-available/default
+cp /proxy/config/apache2.conf /etc/apache2/sites-available/default
 a2ensite default
 service apache2 restart
 
@@ -72,7 +72,7 @@ chmod +x /etc/rc.local
 ### Setup iptables
 iptables -F
 ip6tables -F
-/host/config/setup-iptables.sh
+/proxy/config/setup-iptables.sh
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 

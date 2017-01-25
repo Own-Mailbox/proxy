@@ -1,5 +1,7 @@
 #!/bin/bash -xe
 
+export DEBIAN_FRONTEND="noninteractive"
+
 ### get $DBUSER, $DBPASS, etc.
 source /proxy/settings.sh
 

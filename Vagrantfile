@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     cd /proxy/
-    DEBIAN_FRONTEND=noninteractive ./packages.sh
-    DEBIAN_FRONTEND=noninteractive ./install.sh
+    ./packages.sh
+    ./install.sh
   SHELL
 end

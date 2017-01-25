@@ -1,6 +1,19 @@
 Own-Mailbox Proxy Server
 ========================
 
+Installation in a docker container
+----------------------------------
+
+First install docker: https://docs.docker.com/engine/installation/linux/debian/
+
+Then:
+
++ ./docker.sh build
++ ./docker.sh create
++ ./docker.sh install
++ ./docker.sh shell
+
+
 Installation in a virtual machine
 ---------------------------------
 
@@ -13,15 +26,5 @@ Then:
 
 Etc. (see: https://www.vagrantup.com/docs/getting-started/)
 
-
-Installation in a docker container
-----------------------------------
-
-First install docker: https://docs.docker.com/engine/installation/linux/debian/
-
-Then:
-
-+ ./docker.sh build
-+ ./docker.sh create
-+ ./docker.sh install
-+ ./docker.sh shell
+Note: For the time being, `mysql-server` fails to be installed
+in the virtual machine.

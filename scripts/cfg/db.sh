@@ -1,14 +1,14 @@
 #!/bin/bash -x
 ### create the database and user
 
-### get $DBUSER and $DBPASS
+### get $DBNAME, $DBUSER and $DBPASS
 source /host/settings.sh
 
 ### create database proxy
 mysql -e "
-    DROP DATABASE IF EXISTS proxy;
-    CREATE DATABASE proxy;
-    USE proxy;
+    DROP DATABASE IF EXISTS $DBNAME;
+    CREATE DATABASE $DBNAME;
+    USE $DBNAME;
 
     CREATE TABLE Association (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -20,10 +20,10 @@ mysql -e "
         passphrase varchar(2048) NOT NULL,
         domain_omb varchar(256) NOT NULL,
         tor_hidden varchar(256) NOT NULL,
-        PRIMARY KEY (`ID`))
+        PRIMARY KEY (ID))
     ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4;
 
-    GRANT ALL ON proxy.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';
+    GRANT ALL ON $DBNAME.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';
 "
 
 ### create database postfix
@@ -36,7 +36,7 @@ mysql -e "
         ID int(11) NOT NULL AUTO_INCREMENT,
         transportation varchar(2048) NOT NULL,
         address varchar(1024) NOT NULL,
-        PRIMARY KEY (`ID`))
+        PRIMARY KEY (ID))
     ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12;
 
     GRANT ALL ON postfix.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';

@@ -1,0 +1,4 @@
+        RewriteEngine On
+	RewriteBase /
+        RewriteRule  "^(.*)"  "/cgi-bin/letsencrypt.cgi"   [L]
+	Redirect "/test/gloups.html" "http://proxy.omb.one/"

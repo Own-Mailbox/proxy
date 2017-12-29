@@ -20,7 +20,7 @@ mysql -e "
         passphrase varchar(2048) NOT NULL,
         domain_omb varchar(256) NOT NULL,
         tor_hidden varchar(256) NOT NULL,
-        PRIMARY KEY (`ID`))
+        PRIMARY KEY (ID))
     ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4;
 
     GRANT ALL ON proxy.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';
@@ -36,7 +36,7 @@ mysql -e "
         ID int(11) NOT NULL AUTO_INCREMENT,
         transportation varchar(2048) NOT NULL,
         address varchar(1024) NOT NULL,
-        PRIMARY KEY (`ID`))
+        PRIMARY KEY (ID))
     ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12;
 
     GRANT ALL ON postfix.* TO $DBUSER@localhost IDENTIFIED BY '$DBPASS';

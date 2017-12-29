@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-### get DOMAIN and EMAIL
-source /proxy/settings.sh
+### get FQDN and EMAIL
+source /host/settings.sh
 
 # install certbot (for getting ssl certs with letsencrypt)
 wget https://dl.eff.org/certbot-auto
@@ -25,10 +25,10 @@ a2enconf letsencrypt
 service apache2 reload
 
 # get a ssl cert
-certbot certonly --webroot -m $EMAIL --agree-tos -w /var/www -d $DOMAIN
+certbot certonly --webroot -m $EMAIL --agree-tos -w /var/www -d $FQDN || exit 1
 
 # fix the apache configuration to use the new ssl cert
-certdir=/etc/letsencrypt/live/$DOMAIN
+certdir=/etc/letsencrypt/live/$FQDN
 sed -i /etc/apache2/sites-available/default.conf -r \
     -e "s|#?SSLCertificateFile .*|SSLCertificateFile      $certdir/cert.pem|" \
     -e "s|#?SSLCertificateKeyFile .*|SSLCertificateKeyFile   $certdir/privkey.pem|" \

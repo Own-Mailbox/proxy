@@ -1,7 +1,16 @@
+#!/bin/bash -x
+
+source /host/settings.sh
+
+mkdir -p /var/log/apache2
+
+### create a configuration file
+mkdir -p /var/www/html
+cat <<EOF > /etc/apache2/sites-available/default.conf
 <VirtualHost *:6565>
-       ServerAdmin contact@own-mailbox.com
-       ServerName proxy.omb.one
-       ServerAlias proxy.omb.one
+       ServerAdmin $EMAIL
+       ServerName $FQDN
+       #ServerAlias $FQDN
        DirectoryIndex index.html
        DocumentRoot /var/www/html/
        <Directory />
@@ -22,9 +31,7 @@
                Allow from all
        </Directory>
        ErrorLog ${APACHE_LOG_DIR}/error.log
-       # Possible values include: debug, info, notice, warn, error, crit,
-       # alert, emerg.
-       LogLevel debug
+       LogLevel debug   # debug, info, notice, warn, error, crit, alert, emerg.
        CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
 
        SSLEngine on
@@ -44,3 +51,10 @@
        BrowserMatch "MSIE [17-9]" \
                ssl-unclean-shutdown
 </VirtualHost>
+EOF
+
+### enable ssl etc.
+a2enmod ssl
+a2ensite default
+a2dissite 000-default
+service apache2 restart

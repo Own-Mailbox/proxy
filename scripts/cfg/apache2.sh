@@ -31,7 +31,7 @@ cat <<EOF > /etc/apache2/sites-available/default.conf
                Allow from all
        </Directory>
        ErrorLog ${APACHE_LOG_DIR}/error.log
-       LogLevel debug   # debug, info, notice, warn, error, crit, alert, emerg.
+       LogLevel debug
        CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
 
        SSLEngine on

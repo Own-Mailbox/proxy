@@ -3,9 +3,10 @@
 
 source /host/settings.sh
 
-cd /root/
-git clone https://github.com/Own-Mailbox/sni2tor-proxy.git
-cd sni2tor-proxy
+dir=/opt/Own-Mailbox/sni2tor-proxy
+rm -rf $dir
+git clone https://github.com/Own-Mailbox/sni2tor-proxy.git $dir
+cd $dir
 ./autogen.sh
 ./configure
 make

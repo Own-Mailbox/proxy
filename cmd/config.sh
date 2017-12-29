@@ -20,7 +20,6 @@ cmd_config() {
     ds inject cfg/apache2.sh
     ds inject cfg/postfix.sh
     ds inject cfg/bind9.sh
-    ds inject cfg/iptables.sh
 
     # install and config extra things that help development
     if [[ $DEV == 'true' ]]; then

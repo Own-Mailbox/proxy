@@ -25,6 +25,7 @@ cmd_config() {
     if [[ $DEV == 'true' ]]; then
         ds inject phpmyadmin.sh
         ds inject ssh.sh
+        ds exec apt -y install vim aptitude
     fi
 
     if [[ $FQDN != 'omb.example.org' ]]; then

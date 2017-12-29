@@ -1,10 +1,12 @@
 #!/bin/bash -x
 ### Client-Server Communication
 
-cd /root/
-git clone https://github.com/Own-Mailbox/cs-com.git
-mkdir /var/www/html/request-omb
-cp cs-com/server/* /var/www/html/request-omb/
+dir=/opt/Own-Mailbox/cs-com
+rm -rf $dir
+git clone https://github.com/Own-Mailbox/cs-com.git $dir
+rm -rf /var/www/html/request-omb
+mkdir -p /var/www/html/request-omb
+cp -a $dir/server/* /var/www/html/request-omb/
 
 ### get $DBNAME, $DBUSER, $DBPASS
 source /host/settings.sh

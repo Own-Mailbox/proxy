@@ -14,7 +14,7 @@ cat <<EOF > /var/www/html/request-omb/global_variables.php
 \$db_user="$DBUSER";
 \$db_passphrase="$DBPASS";
 \$db_name="$DBNAME";
-\$domain_post_fix=".omb.one";
+\$domain_post_fix=".$MASTER_DOMAIN";
 \$table_tls_proxy="Association";
 \$data_base_postfix="postfix";
 \$table_postfix="transport";

@@ -8,9 +8,9 @@ source /host/settings.sh
 # Allow your Ip to update domaines.
 
 cat <<EOF >> /etc/bind/named.conf.local
-zone "omb.one" IN {
+zone "$MASTER_DOMAIN" IN {
     type master;
-    file "/var/lib/bind/omb.one";
+    file "/var/lib/bind/$MASTER_DOMAIN";
     allow-update { 164.132.40.32; };
 };
 EOF

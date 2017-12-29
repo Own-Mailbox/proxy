@@ -3,7 +3,9 @@ IMAGE=ombproxy
 CONTAINER=ombproxy
 PORTS="80:80 443:443 53:53 6565:6565"
 
-FQDN=omb.example.org
+#This proxy will give subdomains of MASTER_DOMAIN
+MASTER_DOMAIN=omb.one
+FQDN=proxy.$MASTER_DOMAIN
 EMAIL=contact@omb.example.org
 
 DBNAME=proxy

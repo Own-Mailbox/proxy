@@ -9,6 +9,11 @@ _EOF
 rename_function cmd_create orig_cmd_create
 cmd_create() {
     orig_cmd_create \
-        --cap-add ALL --privileged
-        #--cap-add SYS_ADMIN --cap-add=NET_ADMIN
+        --mount type=bind,src=$(realpath $APP_DIR),dst=/opt/Own-Mailbox/proxy \
+        --env APP_DIR=/opt/Own-Mailbox/proxy \
+        --workdir /var/www \
+        "$@"    # accept additional options, e.g.: -p 2201:22
+
+        #--cap-add SYS_ADMIN --cap-add=NET_ADMIN \
+        #--cap-add ALL --privileged \
 }

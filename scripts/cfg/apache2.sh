@@ -6,55 +6,20 @@ mkdir -p /var/log/apache2
 
 ### create a configuration file
 mkdir -p /var/www/html
-cat <<EOF > /etc/apache2/sites-available/default.conf
-<VirtualHost *:6565>
-       ServerAdmin $EMAIL
-       ServerName $FQDN
-       #ServerAlias $FQDN
-       DirectoryIndex index.html
-       DocumentRoot /var/www/html/
-       <Directory />
-               Options FollowSymLinks
-               AllowOverride None
-       </Directory>
-       <Directory /var/www/>
-               Options Indexes FollowSymLinks MultiViews
-               AllowOverride None
-               Order allow,deny
-               allow from all
-       </Directory>
-       ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
-       <Directory "/usr/lib/cgi-bin">
-               AllowOverride None
-               Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-               Order allow,deny
-               Allow from all
-       </Directory>
-       ErrorLog ${APACHE_LOG_DIR}/error.log
-       LogLevel debug
-       CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
+cp $APP_DIR/src/apache2.conf /etc/apache2/sites-available/default.conf
+sed -i /etc/apache2/sites-available/default.conf \
+    -e "s#ServerAdmin.*#ServerAdmin $EMAIL#" \
+    -e "s#ServerName.*#ServerName $FQDN#" \
+    -e "s#proxy.omb.one#$FQDN#"
 
-       SSLEngine on
-       SSLProtocol all -SSLv2 -SSLv3
-       SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
-       SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
-       #SSLCertificateChainFile /etc/ssl/certs/ssl-cert-snakeoil.pem
-
-       <FilesMatch "\.(cgi|shtml|phtml|php)$">
-               SSLOptions +StdEnvVars
-       </FilesMatch>
-       <Directory /usr/lib/cgi-bin>
-               SSLOptions +StdEnvVars
-       </Directory>
-       BrowserMatch "MSIE [2-6]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
-       # MSIE 7 and newer should be able to use keepalive
-       BrowserMatch "MSIE [17-9]" \
-               ssl-unclean-shutdown
-</VirtualHost>
-EOF
+### copy letsencrypt.cgi
+mkdir -p /usr/lib/cgi-bin/
+cp $APP_DIR/src/letsencrypt.cgi /usr/lib/cgi-bin/
+chmod +x /usr/lib/cgi-bin/letsencrypt.cgi
 
 ### enable ssl etc.
 a2enmod ssl
+a2enmod rewrite
 a2ensite default
 a2dissite 000-default
 service apache2 restart

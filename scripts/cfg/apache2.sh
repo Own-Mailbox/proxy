@@ -14,11 +14,12 @@ sed -i /etc/apache2/sites-available/default.conf \
 
 ### copy letsencrypt.cgi
 mkdir -p /usr/lib/cgi-bin/
-cp cp $APP_DIR/src/letsencrypt.cgi /usr/lib/cgi-bin/
+cp $APP_DIR/src/letsencrypt.cgi /usr/lib/cgi-bin/
 chmod +x /usr/lib/cgi-bin/letsencrypt.cgi
 
 ### enable ssl etc.
 a2enmod ssl
+a2enmod rewrite
 a2ensite default
 a2dissite 000-default
 service apache2 restart

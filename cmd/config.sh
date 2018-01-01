@@ -24,7 +24,6 @@ cmd_config() {
     # install and config extra things that help development
     if [[ $DEV == 'true' ]]; then
         ds inject phpmyadmin.sh
-        ds inject ssh.sh
         ds exec apt -y install vim aptitude
     fi
 

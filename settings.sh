@@ -13,9 +13,6 @@ DBUSER=proxy
 DBPASS='cutAlfApel1TibMunyoss3'
 
 DEV=true
-if [[ $DEV == 'true' ]]; then
-    PORTS+=" 2201:22"
-fi
 
 # ### Gmail account for notifications (by ssmtp).
 # ### Make sure to enable less-secure-apps:

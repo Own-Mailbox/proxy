@@ -13,7 +13,4 @@ cmd_create() {
         --env APP_DIR=/opt/Own-Mailbox/proxy \
         --workdir /var/www \
         "$@"    # accept additional options, e.g.: -p 2201:22
-
-        #--cap-add SYS_ADMIN --cap-add=NET_ADMIN \
-        #--cap-add ALL --privileged \
 }

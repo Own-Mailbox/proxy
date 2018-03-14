@@ -13,8 +13,8 @@
 
 + Next, get OMB-Proxy, init the workdir, and fix/customize the settings:
   ```
-  git clone https://github.com/Own-Mailbox/proxy /opt/docker-scripts/omb/proxy
-  ds init omb/proxy @ombproxy
+  git clone https://github.com/Own-Mailbox/proxy /opt/docker-scripts/ombproxy
+  ds init ombproxy @ombproxy
   cd /var/ds/ombproxy
   vim settings.sh
   ```

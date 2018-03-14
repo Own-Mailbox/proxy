@@ -1,4 +1,4 @@
-APP=Own-Mailbox/proxy
+APP=ombproxy
 IMAGE=ombproxy
 CONTAINER=ombproxy
 PORTS="80:80 443:443 53:53 6565:6565"

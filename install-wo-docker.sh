@@ -14,7 +14,6 @@ cp settings.sh /host/
 ### Update and upgrade and install some other packages.
 apt-get update && apt-get -y upgrade
 apt-get -y install apt-utils apt-transport-https && \
-apt-get -y remove resolvconf openresolv network-manager && \
 apt-get -y install rsyslog logrotate logwatch ssmtp
 
     

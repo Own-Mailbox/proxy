@@ -29,10 +29,12 @@ certbot certonly --webroot -m $EMAIL --agree-tos -w /var/www -d $FQDN || exit 1
 
 # fix the apache configuration to use the new ssl cert
 certdir=/etc/letsencrypt/live/$FQDN
-sed -i /etc/apache2/sites-available/default.conf -r \
+sed -i /etc/apache2/sites-available/ssl.conf -r \
     -e "s|#?SSLCertificateFile .*|SSLCertificateFile      $certdir/cert.pem|" \
     -e "s|#?SSLCertificateKeyFile .*|SSLCertificateKeyFile   $certdir/privkey.pem|" \
     -e "s|#?SSLCertificateChainFile .*|SSLCertificateChainFile $certdir/chain.pem|"
+    
+a2ensite ssl 
 service apache2 reload
 
 ### setup a cron job for renewing the ssl cert periodically

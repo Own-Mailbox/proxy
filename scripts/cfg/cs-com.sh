@@ -7,6 +7,7 @@ git clone https://github.com/Own-Mailbox/cs-com.git $dir
 rm -rf /var/www/html/request-omb
 mkdir -p /var/www/html/request-omb
 cp -a $dir/server/* /var/www/html/request-omb/
+chown www-data /var/www/html/request-omb/Create_Acounts/
 
 ### get $DBNAME, $DBUSER, $DBPASS
 source /host/settings.sh

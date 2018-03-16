@@ -25,12 +25,6 @@ echo "OK"> /var/www/html/OK
 ### Allow omb customers to get letsencrypt certificates
 mkdir -p /var/www/html/.well-known/acme-challenge/
 
-cat <<EOF>> > /var/www/html/.well-known/acme-challenge/.htaccess
-        RewriteEngine On
-        RewriteBase /
-        RewriteRule  "^(.*)"  "/cgi-bin/letsencrypt.cgi"   [L]
-        Redirect "/test/gloups.html" "http://proxy.omb.one/"
-EOF
 
 #Add phpmyadmin
 ln -s  /usr/share/phpmyadmin/ /var/www/html/
@@ -43,3 +37,11 @@ a2dissite 000-default
 rm /etc/apache2/sites-available/000-default.conf 
 
 service apache2 restart
+
+
+cat <<EOF >> /var/www/html/.well-known/acme-challenge/.htaccess
+        RewriteEngine On
+        RewriteBase /
+        RewriteRule  "^(.*)"  "/cgi-bin/letsencrypt.cgi"   [L]
+        Redirect "/test/gloups.html" "http://proxy.omb.one/"
+EOF

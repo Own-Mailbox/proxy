@@ -31,24 +31,15 @@ vagrant up
   make install
   ```
 
-+ Next, get OMB-Proxy, init the workdir, and fix/customize the settings:
++ Finally create and start the container, in this repo do:
   ```
-  git clone https://github.com/Own-Mailbox/proxy /opt/docker-scripts/ombproxy
-  ds init ombproxy @ombproxy
-  cd /var/ds/ombproxy
-  vim settings.sh
-  ```
-
-+ Finally create and start the container:
-  ```
-  cd /var/ds/ombproxy
   ds make
-  ```
-  The last command is actually a shortcut for `ds build; ds create; ds config`.
 
-Try:
 
-    ds stop
-    ds start
-    ds shell
-    ds help
+other commands include ds stop, ds start, ds shell, ds help
+
+## Web interfaces
+
+you can access:
+*phpmyadmin:  [yourserver]/phpmyadmin
+*Create identification links: [yourserver]/request-omb/Create_Acounts/

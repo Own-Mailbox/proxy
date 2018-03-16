@@ -17,6 +17,9 @@ mkdir -p /usr/lib/cgi-bin/
 cp $APP_DIR/src/letsencrypt.cgi /usr/lib/cgi-bin/
 chmod +x /usr/lib/cgi-bin/letsencrypt.cgi
 
+### Create ok file
+echo "OK"> /var/www/html/OK
+
 ### enable ssl etc.
 a2enmod ssl
 a2enmod rewrite

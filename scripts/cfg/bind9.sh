@@ -16,6 +16,8 @@ zone "$MASTER_DOMAIN" IN {
 EOF
 
 cat <<EOF >> /var/lib/bind/$MASTER_DOMAIN
+\$ORIGIN .
+\$TTL 30 ; 30 seconds
 $MASTER_DOMAIN                 IN SOA  $FQDN. email\@omb.one. (
                                 2011042162 ; serial
                                 30         ; refresh (30 seconds)

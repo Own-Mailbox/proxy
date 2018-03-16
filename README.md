@@ -41,5 +41,6 @@ other commands include ds stop, ds start, ds shell, ds help
 ## Web interfaces
 
 you can access:
-*phpmyadmin:  [yourserver]/phpmyadmin
-*Create identification links: [yourserver]/request-omb/Create_Acounts/
+
++ phpmyadmin:  [yourserver]/phpmyadmin
++ Create identification links: [yourserver]/request-omb/Create_Acounts/

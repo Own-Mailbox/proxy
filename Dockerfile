@@ -31,7 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         build-essential git autotools-dev cdbs debhelper \
         dh-autoreconf dpkg-dev gettext libev-dev libpcre3-dev \
         libudns-dev pkg-config fakeroot libmysqlclient-dev \
-        postfix postfix-mysql apache2 bind9
+        postfix postfix-mysql apache2 bind9 phpmyadmin
 
 #COPY config/postfix.init.d /etc/init.d/postfix
 

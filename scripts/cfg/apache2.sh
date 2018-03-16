@@ -32,6 +32,9 @@ cat <<EOF>> > /var/www/html/.well-known/acme-challenge/.htaccess
         Redirect "/test/gloups.html" "http://proxy.omb.one/"
 EOF
 
+#Add phpmyadmin
+ln -s  /usr/share/phpmyadmin/ /var/www/html/
+
 ### enable ssl etc.
 a2enmod ssl
 a2enmod rewrite

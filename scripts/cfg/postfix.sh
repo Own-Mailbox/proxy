@@ -11,7 +11,7 @@ dir=/opt/Own-Mailbox/postfix-smpt2tor-relay
 rm -rf $dir
 git clone https://github.com/Own-Mailbox/postfix-smpt2tor-relay.git $dir
 cd $dir
-cp postfix-cfg/* /etc/config/postfix/
+cp postfix-cfg/* /etc/postfix/
 
 # ToDo: Edit /etc/config/transport.mysql and add your login to the database
 

@@ -24,11 +24,10 @@ $MASTER_DOMAIN                 IN SOA  $FQDN. email\@omb.one. (
                                 180        ; minimum (3 minutes)
                                 )
                         NS      $FQDN.
-$ORIGIN $MASTER_DOMAIN.
+\$ORIGIN $MASTER_DOMAIN.
 *                       A       $SERVER_IP
                         MX      50 $FQDN
                         TXT     "v=spf1 a:$FQDN -all"
-                        $ORIGIN $MASTER_DOMAIN.
 EOF
 
 service bind9 restart

@@ -23,7 +23,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install \
         build-essential git autotools-dev cdbs debhelper \
         dh-autoreconf dpkg-dev gettext libev-dev libpcre3-dev \
         libudns-dev pkg-config fakeroot libmysqlclient-dev \
-        postfix postfix-mysql apache2 bind9 phpmyadmin
+        postfix postfix-mysql apache2 bind9 phpmyadmin tor
         
         
 #########################################################

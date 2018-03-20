@@ -50,7 +50,7 @@ you can access:
 If the DNS configuration did not fully propagate at the time of installation, you may not
 get a https certificate. Make sure your server responds in https on port 6565:
 
-+ https://[yourserver]/
++ https://[yourserver]:6565/
 
 If not run 
 + scripts/cfg/get-ssl-cert.sh

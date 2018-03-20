@@ -44,3 +44,15 @@ you can access:
 
 + phpmyadmin:  [yourserver]/phpmyadmin
 + Create identification links: [yourserver]/request-omb/Create_Acounts/
+
+## Trouble shooting
+
+If the DNS configuration did not fully propagate at the time of installation, you may not
+get a https certificate. Make sure your server responds in https on port 6565:
+
++ https://[yourserver]/
+
+If not run 
++ scripts/cfg/get-ssl-cert.sh
+
+Once DNS configuration is fully updated.

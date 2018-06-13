@@ -24,19 +24,19 @@ vagrant up
 
 + First install docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 
-+ Then install Docker-Scripts: https://github.com/docker-scripts/ds#installation
++ Then build and run the docker image:
   ```
-  git clone https://github.com/docker-scripts/ds /opt/docker-scripts/ds
-  cd /opt/docker-scripts/ds/
-  make install
+  docker build -t proxy
+  docker run -d -p 80:80 -p 443:443 -p 5353:53 -p 6565:6565 --name=proxy proxy
   ```
 
-+ Finally create and start the container, in this repo do:
++ You can get shell access to the container (if needed) by using:
   ```
-  ds make
+  docker exec -it proxy bash
+  ```
 
+An automated build/run script will be in a future update
 
-other commands include ds stop, ds start, ds shell, ds help
 
 ## Web interfaces
 
@@ -52,7 +52,7 @@ get a https certificate. Make sure your server responds in https on port 6565:
 
 + https://[yourserver]:6565/
 
-If not run 
+If not run
 + scripts/cfg/get-ssl-cert.sh
 
 Once DNS configuration is fully updated.

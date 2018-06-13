@@ -40,5 +40,5 @@ COPY src/ /src
 COPY dockercfg.sh /
 RUN chmod 775 dockercfg.sh && ./dockercfg.sh
 
-CMD ["/bin/bash"]
+CMD ["/sbin/init"]
 EXPOSE 80 443 53 6565

@@ -26,8 +26,8 @@ vagrant up
 
 + Then build and run the docker image:
   ```
-  docker build -t proxy
-  docker run -d -p 80:80 -p 443:443 -p 5353:53 -p 6565:6565 --name=proxy proxy
+  docker build -t proxy .
+  docker run -d -p 80:80 -p 443:443 -p 53:53 -p 6565:6565 --name=proxy proxy
   ```
 
 + You can get shell access to the container (if needed) by using:

@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 # ENV container docker
 # # Don't start any optional services except for the few we need.
 # RUN find /etc/systemd/system \
@@ -21,16 +21,21 @@ RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install apt-utils apt-transport-https apache2 && \
     apt-get -y install rsyslog logrotate logwatch ssmtp wget
 
-### Install mysql db
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server
+### Install maria db
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-client \
+                libmariadbclient-dev mariadb-common mariadb-server
+
+# ### Start the mysql server
+# RUN /etc/init.d/mysql start
 
 ### Install some required packages.
-RUN DEBIAN_FRONTEND=noninteractive \
+RUN /etc/init.d/mysql start && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get -y install \
         build-essential git autotools-dev cdbs debhelper \
         dh-autoreconf dpkg-dev gettext libev-dev libpcre3-dev \
-        libudns-dev pkg-config fakeroot libmysqlclient-dev \
-        postfix postfix-mysql apache2 bind9 phpmyadmin tor
+        libudns-dev pkg-config fakeroot phpmyadmin tor \
+        postfix postfix-mysql apache2 bind9 systemd-sysv
 
 #########################################################
 #           Run configuration scripts                   #

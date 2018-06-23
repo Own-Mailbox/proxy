@@ -4,6 +4,9 @@
 ### get $DBNAME, $DBUSER and $DBPASS
 source /host/settings.sh
 
+### start the mysql daemon
+/etc/init.d/mysql start
+
 ### create database proxy
 mysql -e "
     DROP DATABASE IF EXISTS $DBNAME;

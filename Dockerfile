@@ -1,15 +1,4 @@
 FROM debian:stretch
-# ENV container docker
-# # Don't start any optional services except for the few we need.
-# RUN find /etc/systemd/system \
-#          /lib/systemd/system \
-#          -path '*.wants/*' \
-#          -not -name '*journald*' \
-#          -not -name '*systemd-tmpfiles*' \
-#          -not -name '*systemd-user-sessions*' \
-#          -exec rm \{} \;
-# RUN systemctl set-default multi-user.target
-# # CMD ["/sbin/init"]
 
 RUN export APP_DIR=$(pwd)
 RUN mkdir /host/
@@ -25,10 +14,8 @@ RUN apt-get -y install apt-utils apt-transport-https apache2 && \
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-client \
                 libmariadbclient-dev mariadb-common mariadb-server
 
-# ### Start the mysql server
-# RUN /etc/init.d/mysql start
-
-### Install some required packages.
+### Start the mysql server && install some required packages
+### noninteractive is required in order to avoid postfix prompts
 RUN /etc/init.d/mysql start && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get -y install \
@@ -43,7 +30,8 @@ RUN /etc/init.d/mysql start && \
 COPY scripts/cfg/ /
 COPY src/ /src
 COPY dockercfg.sh /
-RUN chmod 775 dockercfg.sh && ./dockercfg.sh
+COPY init.sh /
+RUN chmod 775 dockercfg.sh init.sh && ./dockercfg.sh
 
-CMD ["/sbin/init"]
+CMD ./init.sh
 EXPOSE 80 443 53 6565

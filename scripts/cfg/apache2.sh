@@ -1,4 +1,5 @@
 #!/bin/bash -x
+echo "Configuring Apache"
 
 source /host/settings.sh
 
@@ -34,7 +35,6 @@ a2enmod ssl
 a2enmod rewrite
 a2ensite default
 a2dissite 000-default
-rm /etc/apache2/sites-available/000-default.conf 
+rm /etc/apache2/sites-available/000-default.conf
 
 service apache2 restart
-

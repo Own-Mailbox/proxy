@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### install sni2torproxy
 
+echo "Configuring sni2torproxy"
+
 source /host/settings.sh
 
 dir=/opt/Own-Mailbox/sni2tor-proxy

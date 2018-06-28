@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### Configure postfix.
 
+echo "Configuring postfix"
+
 source /host/settings.sh
 
 # setup hostname

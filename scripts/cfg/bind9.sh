@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### Configure bind.
 
+echo "Configuring Bind9"
+
 source /host/settings.sh
 
 # setup your domain zone (omb.one file) in /var/lib/bind so that it can be updated

@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### Client-Server Communication
 
+echo "Configuring cs-com"
+
 dir=/opt/Own-Mailbox/cs-com
 rm -rf $dir
 git clone https://github.com/Own-Mailbox/cs-com.git $dir

@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### create the database and user
 
+echo "Configuring databases"
+
 ### get $DBNAME, $DBUSER and $DBPASS
 source /host/settings.sh
 

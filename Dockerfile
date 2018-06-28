@@ -25,14 +25,19 @@ RUN /etc/init.d/mysql start && \
         libudns-dev pkg-config fakeroot phpmyadmin tor \
         postfix postfix-mysql apache2 bind9 systemd-sysv devscripts
 
-#########################################################
-#           Run configuration scripts                   #
-#########################################################
+### Run configuration scripts
 COPY scripts/cfg/ /
 COPY src/ /src
 COPY dockercfg.sh /
 COPY init.sh /
+
 RUN chmod 775 dockercfg.sh init.sh && ./dockercfg.sh
+
+### Setup Bind9 to use seperate logs
+COPY scripts/bind/* /etc/bind/named.conf.log
+RUN echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+RUN mkdir /var/log/bind && chown bind:bind /var/log/bind && \
+          service bind9 restart
 
 CMD ./init.sh
 EXPOSE 80 443 53 6565

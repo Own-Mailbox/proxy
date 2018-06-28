@@ -13,15 +13,3 @@ DBUSER=proxy
 DBPASS='cutAlfApel1TibMunyoss3'
 
 DEV=true
-
-#Docker related
-APP=ombproxy
-IMAGE=ombproxy
-CONTAINER=ombproxy
-PORTS="80:80 443:443 53:53 6565:6565"
-
-# ### Gmail account for notifications (by ssmtp).
-# ### Make sure to enable less-secure-apps:
-# ### https://support.google.com/accounts/answer/6010255?hl=en
-# GMAIL_ADDRESS=
-# GMAIL_PASSWD=

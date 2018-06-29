@@ -14,14 +14,6 @@ if [ $status -ne 0 ]; then
  exit $status
 fi
 
-# Start bind9
-service bind9 start
-status=$?
-if [ $status -ne 0 ]; then
- echo "Failed to start bind9: $status"
- exit $status
-fi
-
 # Start postfix
 service postfix start
 status=$?
@@ -35,6 +27,22 @@ service rsyslog start
 status=$?
 if [ $status -ne 0 ]; then
  echo "Failed to start rsyslog: $status"
+ exit $status
+fi
+
+# Start tor
+service tor start
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to start tor: $status"
+ exit $status
+fi
+
+# Start bind9
+service bind9 start
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to start bind9: $status"
  exit $status
 fi
 

@@ -21,16 +21,26 @@ before running this. Do not install this way on a machine that hosts other servi
 vagrant up
 
 ## Installation with docker
+Warning!!! make sure your machine is fully dedicated to being the proxy
+before running this. Do not install this way on a machine that hosts other services.
+
+Also make sure that __no Apache2, mysql/mariadb or tor__ is running on the host machine.
 
 + First install docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 
 + Then build and run the docker image:
   ```
   docker build -t proxy .
-  docker run -d -p 80:80 -p 443:443 -p 53:53 -p 6565:6565 --name=proxy proxy
+  docker run -d --network host --hostname proxy --name=proxy proxy
   ```
+  + The `--network host` option is essential for the proxy functionality as it forces the container
+  to use the host machine's network stack.
+  + The `--hostname proxy` option changes the hostname of the container to "proxy" (as by default it is the
+  same with the host's hostname).
+
 
 + You can get shell access to the container (if needed) by using:
+
   ```
   docker exec -it proxy bash
   ```

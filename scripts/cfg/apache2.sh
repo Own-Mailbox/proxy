@@ -15,6 +15,9 @@ sed -i /etc/apache2/sites-available/default.conf \
     -e "s#ServerName.*#ServerName $FQDN#" \
     -e "s#proxy.omb.one#$FQDN#"
 
+sed -i /etc/apache2/sites-available/ssl.conf \
+    -e "s#ServerName.*#ServerName $FQDN#" \
+
 ### copy letsencrypt.cgi
 mkdir -p /usr/lib/cgi-bin/
 cp $APP_DIR/src/letsencrypt.cgi /usr/lib/cgi-bin/
@@ -34,6 +37,7 @@ ln -s  /usr/share/phpmyadmin/ /var/www/html/
 a2enmod ssl
 a2enmod rewrite
 a2ensite default
+a2ensite ssl
 a2dissite 000-default
 rm /etc/apache2/sites-available/000-default.conf
 

@@ -45,7 +45,14 @@ Also make sure that __no Apache2, mysql/mariadb or tor__ is running on the host 
   docker exec -it proxy bash
   ```
 
-An automated build/run script will be in a future update
+#### Automated Docker Installation
+
+You can install everything automatically by using the `automate-docker.sh` script included in the repository.
+Keep in mind that this will erase all docker images and containers existing on the host machine!
+You can access the installation logs at `/var/log/<master_domain>`.
+
+Same warnings as above apply! Make sure to use the machine only for the proxy.
+
 
 
 ## Web interfaces

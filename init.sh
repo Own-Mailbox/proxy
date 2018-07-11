@@ -46,6 +46,14 @@ if [ $status -ne 0 ]; then
  exit $status
 fi
 
+# Make sure certificate is issued
+./get-ssl-cert.sh
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to issue cert: $status"
+ exit $status
+fi
+
 while /bin/true; do
  sleep 60
 done

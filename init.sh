@@ -30,6 +30,14 @@ if [ $status -ne 0 ]; then
  exit $status
 fi
 
+# Start cron
+service cron start
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to start cron: $status"
+ exit $status
+fi
+
 # Start tor
 service tor start
 status=$?

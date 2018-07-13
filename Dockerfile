@@ -39,5 +39,9 @@ RUN echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
 RUN mkdir /var/log/bind && chown bind:bind /var/log/bind && \
           service bind9 restart
 
+### Setup chrontab
+COPY crontab-file
+RUN crontab crontab-file
+
 CMD ./init.sh
 EXPOSE 80 443 53 6565

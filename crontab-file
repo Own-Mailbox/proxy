@@ -1,0 +1,2 @@
+*/2 * * * * /usr/local/sbin/sni2tor.sh >/dev/null 2>&1
+12 00 15 * * certbot renew --quiet && service apache2 reload

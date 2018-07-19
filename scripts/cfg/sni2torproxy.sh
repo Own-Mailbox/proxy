@@ -31,5 +31,7 @@ chmod +x /usr/local/sbin/sni2tor.sh
 mkdir -p /etc/cron.d/
 cat <<'EOF' > /etc/cron.d/sni2tor
 */2 * * * * root /usr/local/sbin/sni2tor.sh >/dev/null 2>&1
++12 00 15 * * certbot renew --quiet && service apache2 reload
 EOF
 chmod +x /etc/cron.d/sni2tor
+crontab /etc/cron.d/sni2tor

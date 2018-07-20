@@ -13,7 +13,7 @@ RUN apt-get -y install apt-utils apt-transport-https apache2 && \
 ### Install maria db
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-client \
                 libmariadbclient-dev mariadb-common mariadb-server \
-                default-libmysqlclient-dev
+                default-libmysqlclient-dev dovecot-common postfix-pcre
 
 ### Start the mysql server && install some required packages
 ### noninteractive is required in order to avoid postfix prompts

@@ -70,6 +70,14 @@ if [ $status -ne 0 ]; then
  exit $status
 fi
 
+# Start dovecot service
+service dovecot start
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to start dovecot: $status"
+ exit $status
+fi
+
 while /bin/true; do
  sleep 60
 done

@@ -13,10 +13,11 @@ cp $APP_DIR/src/apache2/ports.conf /etc/apache2/
 sed -i /etc/apache2/sites-available/default.conf \
     -e "s#ServerAdmin.*#ServerAdmin $EMAIL#" \
     -e "s#ServerName.*#ServerName $FQDN#" \
-    -e "s#proxy.omb.one#$FQDN#"
+    -e "s#proxy.omb.one# $FQDN#"
 
 sed -i /etc/apache2/sites-available/ssl.conf \
     -e "s#ServerName.*#ServerName $FQDN#" \
+    -e "s#proxy.omb.one# $FQDN#"
 
 ### copy letsencrypt.cgi
 mkdir -p /usr/lib/cgi-bin/
@@ -27,6 +28,9 @@ chmod +x /usr/lib/cgi-bin/letsencrypt.cgi
 echo "OK"> /var/www/html/OK
 
 ### Allow omb customers to get letsencrypt certificates
+sed -i $APP_DIR/src/apache2/.htaccess \
+    -e "s#proxy.omb.one# $FQDN#"
+
 mkdir -p /var/www/html/.well-known/acme-challenge/
 cp $APP_DIR/src/apache2/.htaccess /var/www/html/.well-known/acme-challenge/
 

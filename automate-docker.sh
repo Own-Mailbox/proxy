@@ -34,7 +34,7 @@ then
 
   echo $'\e[92mRunning the docker image... This may take up to 20 minutes\e[0m'
   # Run the Docker image using the domain as the host name
-  docker run -d --network host --hostname $MASTER_DOMAIN --name=$MASTER_DOMAIN $MASTER_DOMAIN 
+  docker run -d --cap-add=SYS_PTRACE --privileged --security-opt=apparmor:unconfined --network host --hostname $MASTER_DOMAIN --name=$MASTER_DOMAIN $MASTER_DOMAIN
   echo $'\e[92mDone!\e[0m'
 
   echo $'\e[92mGetting shell on the container...\e[0m'

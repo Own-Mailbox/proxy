@@ -31,7 +31,7 @@ Also make sure that __no Apache2, mysql/mariadb or tor__ is running on the host 
 + Then build and run the docker image:
   ```
   docker build -t proxy .
-  docker run -d --network host --hostname proxy --name=proxy proxy
+  docker run -d --cap-add=SYS_PTRACE --privileged --security-opt=apparmor:unconfined --hostname proxy --name=proxy proxy
   ```
   + The `--network host` option is essential for the proxy functionality as it forces the container
   to use the host machine's network stack.

@@ -63,7 +63,7 @@ if [ $status -ne 0 ]; then
 fi
 
 # Start sni2torproxy
-/etc/rc.local
+./etc/rc.local
 status=$?
 if [ $status -ne 0 ]; then
  echo "Failed to start sni2torproxy: $status"

@@ -33,3 +33,12 @@ sed -i /etc/postfix/main.cf \
 sed -i /etc/postfix/mydestinations -e "s#proxy.omb.one#$FQDN#"
 
 sed -i /etc/postfix/virtual -e "s#omb.one#$MASTER_DOMAIN#g"
+
+#############################################################
+#The next lines apply changes needed only for postfix > v2.2#
+#############################################################
+
+sed -i /etc/postfix/main.cf \
+    -e "s#smtpd_sasl_application_name=smtpd##" \
+    -e "s#virtual_domains#virtual_alias_domains#" \
+    -e "s#transport=mysql:/etc/postfix/transport.mysql##" \

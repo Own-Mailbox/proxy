@@ -16,6 +16,10 @@ cd $dir
 cp postfix-cfg/* /etc/postfix/
 
 # ToDo: Edit /etc/config/transport.mysql and add your login to the database
+sed -i /etc/postfix/transport.mysql \
+    -e "s#root#$DBUSER#" \
+    -e "s#xxxxxxx#$DBPASS#" \
+    -e "s#postfix#$DBNAME#" \
 
 cp scripts/* /usr/lib/postfix/
 

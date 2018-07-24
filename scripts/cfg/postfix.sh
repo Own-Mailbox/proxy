@@ -21,3 +21,11 @@ cp scripts/* /usr/lib/postfix/
 
 sed -i /etc/postfix/master.cf -e '/^smtptor unix - - - - - smtp_tor$/d'
 echo "smtptor unix - - - - - smtp_tor" >> /etc/postfix/master.cf
+
+sed -i /etc/postfix/main.cf \
+    -e "s#proxy.omb.one-0003#$FQDN#g" \
+    -e "s#proxy.omb.one#$FQDN#g" \
+
+sed -i /etc/postfix/mydestinations -e "s#proxy.omb.one#$FQDN#"
+
+sed -i /etc/postfix/virtual -e "s#omb.one#$MASTER_DOMAIN#g"

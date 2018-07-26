@@ -14,6 +14,9 @@ chown www-data /var/www/html/request-omb/Create_Acounts/
 ### get $DBNAME, $DBUSER, $DBPASS
 source /host/settings.sh
 
+sed -i /var/www/html/request-omb/Create_Acounts/add-dovecot-user.sh \
+    -e "s#proxy.omb.one#$FQDN#"
+
 cat <<EOF > /var/www/html/request-omb/global_variables.php
 <?php
 \$db_user="$DBUSER";

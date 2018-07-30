@@ -34,7 +34,14 @@ sed -i /etc/postfix/main.cf \
     -e "s#proxy.omb.one-0003#$FQDN#g" \
     -e "s#proxy.omb.one#$FQDN#g" \
 
-sed -i /etc/postfix/mydestinations -e "s#proxy.omb.one#$FQDN#"
+domain=$(cut -d '.' -f 1 <<< "$MASTER_DOMAIN")
+region=$(cut -d '.' -f 2 <<< "$MASTER_DOMAIN")
+
+# not removing the FQDN line as someone may change the term 'proxy'
+sed -i /etc/postfix/mydestinations \
+    -e "s#omb#$domain#"\
+    -e "s#one#$region#" \
+    -e "s#proxy.omb.one#$FQDN#" \
 
 sed -i /etc/postfix/virtual -e "s#omb.one#$MASTER_DOMAIN#g"
 

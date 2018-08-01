@@ -45,6 +45,9 @@ Also make sure that __no Apache2, mysql/mariadb or tor__ is running on the host 
   docker exec -it proxy bash
   ```
 
+Keep in mind that it takes 2-3 minutes in order to issue the ssl cert and start all services
+after the Docker container is created.
+
 #### Automated Docker Installation
 
 You can install everything automatically by using the `automate-docker.sh` script included in the repository.

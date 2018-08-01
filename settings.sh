@@ -1,15 +1,15 @@
 #Our public IP (the proxy needs a public IP)
-SERVER_IP=164.132.40.32
+SERVER_IP=
 
 #This proxy will give subdomains of MASTER_DOMAIN
 #DND authority for MASTER_DOMAIN must be this machine
-MASTER_DOMAIN=omb.one
+MASTER_DOMAIN=
 FQDN=proxy.$MASTER_DOMAIN
-EMAIL=contact@omb.example.org
+EMAIL=
 
 #Database related
 DBNAME=proxy
 DBUSER=proxy
-DBPASS='cutAlfApel1TibMunyoss3'
+DBPASS='password'
 
 DEV=true

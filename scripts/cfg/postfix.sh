@@ -50,6 +50,6 @@ sed -i /etc/postfix/virtual -e "s#omb.one#$MASTER_DOMAIN#g"
 #############################################################
 
 sed -i /etc/postfix/main.cf \
-    -e "s#smtpd_sasl_application_name=smtpd##" \
+    -e "s#smtpd_sasl_application_name = smtpd##" \
     -e "s#virtual_domains#virtual_alias_domains#" \
-    -e "s#transport=mysql:/etc/postfix/transport.mysql##" \
+    -e "s#transport = mysql:/etc/postfix/transport.mysql##" \

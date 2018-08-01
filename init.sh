@@ -63,6 +63,9 @@ if [ $status -ne 0 ]; then
 fi
 
 # Make sure certificate is issued
+# If we don't force the answer No, the container crashes
+# as it is waiting forever for a response to the certbot
+# survey question
 no | ./get-ssl-cert.sh
 status=$?
 if [ $status -ne 0 ]; then
@@ -77,14 +80,6 @@ if [ $status -ne 0 ]; then
  echo "Failed to start sni2torproxy: $status"
  exit $status
 fi
-
-# Start dovecot service
-#service dovecot start
-#status=$?
-#if [ $status -ne 0 ]; then
-# echo "Failed to start dovecot: $status"
-# exit $status
-#fi
 
 while /bin/true; do
  sleep 60

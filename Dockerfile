@@ -9,7 +9,7 @@ COPY settings.sh /host/
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install apt-utils apt-transport-https apache2 && \
     apt-get -y install rsyslog logrotate logwatch ssmtp wget whois \
-    dovecot-common postfix-pcre
+    dovecot-common
 
 ### Install maria db
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-client \
@@ -24,7 +24,7 @@ RUN /etc/init.d/mysql start && \
         build-essential git autotools-dev cdbs debhelper \
         dh-autoreconf dpkg-dev gettext libev-dev libpcre3-dev \
         libudns-dev pkg-config fakeroot phpmyadmin tor \
-        postfix postfix-mysql apache2 bind9 systemd-sysv devscripts
+        postfix postfix-pcre postfix-mysql apache2 bind9 systemd-sysv devscripts
 
 ### Run configuration scripts
 COPY scripts/cfg/ /

@@ -33,7 +33,7 @@ cat <<'EOF' > /etc/cron.d/sni2tor
 PATH=/opt/someApp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/$
 
 */2 * * * * bash /usr/local/sbin/sni2tor.sh >/dev/null 2>&1
-+12 00 15 * * certbot renew --quiet && service apache2 reload
+12 00 15 * * certbot renew --quiet && service apache2 reload
 EOF
 chmod +x /etc/cron.d/sni2tor
 crontab /etc/cron.d/sni2tor

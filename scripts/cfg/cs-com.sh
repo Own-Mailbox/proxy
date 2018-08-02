@@ -17,6 +17,8 @@ source /host/settings.sh
 sed -i /var/www/html/request-omb/Create_Acounts/add-dovecot-user.sh \
     -e "s#proxy.omb.one#$FQDN#"
 
+cp /var/www/html/request-omb/Create_Acounts/add-dovecot-user.sh /usr/lib/cgi-bin/
+
 cat <<EOF > /var/www/html/request-omb/global_variables.php
 <?php
 \$db_user="$DBUSER";

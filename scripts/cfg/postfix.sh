@@ -19,7 +19,6 @@ cp postfix-cfg/* /etc/postfix/
 sed -i /etc/postfix/transport.mysql \
     -e "s#root#$DBUSER#" \
     -e "s#xxxxxxx#$DBPASS#" \
-    -e "s#postfix#$DBNAME#" \
 
 cp scripts/* /usr/lib/postfix/
 
@@ -27,7 +26,10 @@ cp /usr/lib/postfix/smtp_tor /usr/lib/postfix/sbin/
 sed -i /usr/lib/postfix/sbin/smtp_tor \ 
     -e 's#/usr/lib/postfix/smtp#/usr/lib/postfix/sbin/smtp#'
 
-sed -i /etc/postfix/master.cf -e '/^smtptor unix - - - - - smtp_tor$/d'
+sed -i /etc/postfix/master.cf \
+    -e '/^smtptor unix - - - - - smtp_tor$/d' \
+    -e "s/#submission/submission/"
+
 echo "smtptor unix - - - - - smtp_tor" >> /etc/postfix/master.cf
 
 sed -i /etc/postfix/main.cf \

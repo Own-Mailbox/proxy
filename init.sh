@@ -6,6 +6,25 @@ if [ $status -ne 0 ]; then
  exit $status
 fi
 
+# Start bind9
+service bind9 start
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to start bind9: $status"
+ exit $status
+fi
+
+# Make sure certificate is issued
+# If we don't force the answer No, the container crashes
+# as it is waiting forever for a response to the certbot
+# survey question
+no | ./get-ssl-cert.sh
+status=$?
+if [ $status -ne 0 ]; then
+ echo "Failed to issue cert: $status"
+ exit $status
+fi
+
 # Start mysql/mariadb (points to the same service on deb)
 service mysql start
 status=$?
@@ -51,25 +70,6 @@ service tor start
 status=$?
 if [ $status -ne 0 ]; then
  echo "Failed to start tor: $status"
- exit $status
-fi
-
-# Start bind9
-service bind9 start
-status=$?
-if [ $status -ne 0 ]; then
- echo "Failed to start bind9: $status"
- exit $status
-fi
-
-# Make sure certificate is issued
-# If we don't force the answer No, the container crashes
-# as it is waiting forever for a response to the certbot
-# survey question
-no | ./get-ssl-cert.sh
-status=$?
-if [ $status -ne 0 ]; then
- echo "Failed to issue cert: $status"
  exit $status
 fi
 

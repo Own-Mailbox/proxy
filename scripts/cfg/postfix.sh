@@ -23,14 +23,15 @@ sed -i /etc/postfix/transport.mysql \
 cp scripts/* /usr/lib/postfix/
 
 cp /usr/lib/postfix/smtp_tor /usr/lib/postfix/sbin/
-sed -i /usr/lib/postfix/sbin/smtp_tor \ 
+sed -i /usr/lib/postfix/sbin/smtp_tor \
     -e 's#/usr/lib/postfix/smtp#/usr/lib/postfix/sbin/smtp#'
 
 sed -i /etc/postfix/master.cf \
     -e '/^smtptor unix - - - - - smtp_tor$/d' \
     -e "s/#submission/submission/"
 
-echo "smtptor unix - - - - - smtp_tor" >> /etc/postfix/master.cf
+echo "smtptor      unix  -       -       -       -       -       smtp_tor
+  -o smtp_dns_support_level=disabled" >> /etc/postfix/master.cf
 
 sed -i /etc/postfix/main.cf \
     -e "s#proxy.omb.one-0003#$FQDN#g" \

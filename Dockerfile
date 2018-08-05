@@ -9,7 +9,7 @@ COPY settings.sh /host/
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install apt-utils apt-transport-https apache2 && \
     apt-get -y install rsyslog logrotate logwatch ssmtp wget whois \
-    dovecot-common
+    dovecot-common sudo vim
 
 ### Install maria db
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-client \
@@ -33,6 +33,10 @@ COPY dockercfg.sh /
 COPY init.sh /
 
 RUN chmod 775 dockercfg.sh init.sh && ./dockercfg.sh
+
+### Give permission to anyone to run add-dovecot-user. This is needed because
+### the script is executed from within PHP.
+RUN echo 'www-data ALL=(ALL) NOPASSWD: /usr/lib/cgi-bin/add-dovecot-user.sh' | EDITOR='tee -a' visudo
 
 ### Setup Bind9 to use seperate logs
 COPY scripts/bind/* /etc/bind/named.conf.log

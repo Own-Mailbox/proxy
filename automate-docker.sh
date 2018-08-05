@@ -1,4 +1,4 @@
-source /host/settings.sh
+source settings.sh
 
 echo $'\e[31mPlease disable any apache/mysql/tor service running on the host machine!\e[0m'
 read -p $'\e[33mThis will delete all Docker images/containers on this machine!!! Continue?\e[0m ' -n 1 -r

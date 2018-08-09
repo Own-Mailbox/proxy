@@ -45,6 +45,7 @@ ln -s  /usr/share/phpmyadmin/ /var/www/html/
 ### enable ssl etc.
 a2enmod ssl
 a2enmod rewrite
+a2enmod cgi
 a2ensite default
 a2ensite ssl
 a2dissite 000-default

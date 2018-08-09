@@ -23,6 +23,7 @@ Alias /.well-known/acme-challenge /var/www/.well-known/acme-challenge
     ForceType text/plain
 </Directory>
 EOF
+a2enconf letsencrypt
 service apache2 reload
 
 # get a ssl cert
@@ -44,3 +45,6 @@ cat <<EOF > /etc/cron.weekly/renew-ssl-cert
 certbot renew --webroot --quiet --post-hook='/etc/init.d/apache2 reload'
 EOF
 chmod +x /etc/cron.weekly/renew-ssl-cert
+
+a2disconf letsencrypt
+service apache2 reload

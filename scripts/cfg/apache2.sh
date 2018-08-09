@@ -42,9 +42,6 @@ cp $APP_DIR/src/apache2/.htaccess /var/www/html/.well-known/acme-challenge/
 #Add phpmyadmin
 ln -s  /usr/share/phpmyadmin/ /var/www/html/
 
-### this fixes .htaccess files being ignored in /.well-known
-a2disconf letsencrypt
-
 ### enable ssl etc.
 a2enmod ssl
 a2enmod rewrite

@@ -23,7 +23,6 @@ Alias /.well-known/acme-challenge /var/www/.well-known/acme-challenge
     ForceType text/plain
 </Directory>
 EOF
-a2enconf letsencrypt
 service apache2 reload
 
 # get a ssl cert

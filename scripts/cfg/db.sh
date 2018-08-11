@@ -1,8 +1,13 @@
 #!/bin/bash -x
 ### create the database and user
 
+echo "Configuring databases"
+
 ### get $DBNAME, $DBUSER and $DBPASS
 source /host/settings.sh
+
+### start the mysql daemon
+/etc/init.d/mysql start
 
 ### create database proxy
 mysql -e "

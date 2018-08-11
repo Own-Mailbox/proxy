@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+echo "Configuring SSL certs"
+
 ### get FQDN and EMAIL
 source /host/settings.sh
 
@@ -33,8 +35,8 @@ sed -i /etc/apache2/sites-available/ssl.conf -r \
     -e "s|#?SSLCertificateFile .*|SSLCertificateFile      $certdir/cert.pem|" \
     -e "s|#?SSLCertificateKeyFile .*|SSLCertificateKeyFile   $certdir/privkey.pem|" \
     -e "s|#?SSLCertificateChainFile .*|SSLCertificateChainFile $certdir/chain.pem|"
-    
-a2ensite ssl 
+
+a2ensite ssl
 service apache2 reload
 
 ### setup a cron job for renewing the ssl cert periodically
@@ -44,3 +46,5 @@ certbot renew --webroot --quiet --post-hook='/etc/init.d/apache2 reload'
 EOF
 chmod +x /etc/cron.weekly/renew-ssl-cert
 
+a2disconf letsencrypt
+service apache2 reload

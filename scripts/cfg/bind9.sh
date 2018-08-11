@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### Configure bind.
 
+echo "Configuring Bind9"
+
 source /host/settings.sh
 
 # setup your domain zone (omb.one file) in /var/lib/bind so that it can be updated
@@ -18,7 +20,7 @@ EOF
 cat <<EOF >> /var/lib/bind/$MASTER_DOMAIN
 \$ORIGIN .
 \$TTL 30 ; 30 seconds
-$MASTER_DOMAIN                 IN SOA  $FQDN. email\@omb.one. (
+$MASTER_DOMAIN                 IN SOA  $FQDN. email\@$MASTER_DOMAIN. (
                                 2011042162 ; serial
                                 30         ; refresh (30 seconds)
                                 900        ; retry (15 minutes)

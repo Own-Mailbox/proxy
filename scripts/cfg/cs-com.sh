@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### Client-Server Communication
 
+echo "Configuring cs-com"
+
 dir=/opt/Own-Mailbox/cs-com
 rm -rf $dir
 git clone https://github.com/Own-Mailbox/cs-com.git $dir
@@ -11,6 +13,11 @@ chown www-data /var/www/html/request-omb/Create_Acounts/
 
 ### get $DBNAME, $DBUSER, $DBPASS
 source /host/settings.sh
+
+sed -i /var/www/html/request-omb/Create_Acounts/add-dovecot-user.sh \
+    -e "s#proxy.omb.one#$FQDN#"
+
+cp /var/www/html/request-omb/Create_Acounts/add-dovecot-user.sh /usr/lib/cgi-bin/
 
 cat <<EOF > /var/www/html/request-omb/global_variables.php
 <?php

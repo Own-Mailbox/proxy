@@ -1,6 +1,8 @@
 #!/bin/bash -x
 ### install sni2torproxy
 
+echo "Configuring sni2torproxy"
+
 source /host/settings.sh
 
 dir=/opt/Own-Mailbox/sni2tor-proxy
@@ -28,6 +30,10 @@ cp $APP_DIR/src/restart-sni2tor.sh /usr/local/sbin/sni2tor.sh
 chmod +x /usr/local/sbin/sni2tor.sh
 mkdir -p /etc/cron.d/
 cat <<'EOF' > /etc/cron.d/sni2tor
-*/2 * * * * root /usr/local/sbin/sni2tor.sh >/dev/null 2>&1
+PATH=/opt/someApp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/$
+
+*/2 * * * * bash /usr/local/sbin/sni2tor.sh >/dev/null 2>&1
+12 00 15 * * certbot renew --quiet && service apache2 reload
 EOF
 chmod +x /etc/cron.d/sni2tor
+crontab /etc/cron.d/sni2tor

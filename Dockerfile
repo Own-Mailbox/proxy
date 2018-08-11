@@ -1,38 +1,48 @@
-FROM ubuntu:16.04
-ENV container docker
-# Don't start any optional services except for the few we need.
-RUN find /etc/systemd/system \
-         /lib/systemd/system \
-         -path '*.wants/*' \
-         -not -name '*journald*' \
-         -not -name '*systemd-tmpfiles*' \
-         -not -name '*systemd-user-sessions*' \
-         -exec rm \{} \;
-RUN systemctl set-default multi-user.target
-CMD ["/sbin/init"]
+FROM debian:stretch
+
+RUN export APP_DIR=$(pwd)
+RUN mkdir /host/
+
+COPY settings.sh /host/
 
 ### Update and upgrade and install some other packages.
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install apt-utils apt-transport-https && \
-    apt-get -y remove resolvconf openresolv network-manager && \
-    apt-get -y install rsyslog logrotate logwatch ssmtp
+RUN apt-get -y install apt-utils apt-transport-https apache2 && \
+    apt-get -y install rsyslog logrotate logwatch ssmtp wget whois \
+    dovecot-common sudo vim
 
-### Install mariadb.
-RUN apt-get -y install software-properties-common && \
-    apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
-    add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.2/ubuntu xenial main' && \
-    apt-get update
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get -y install mariadb-server mariadb-client
+### Install maria db
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-client \
+                libmariadbclient-dev mariadb-common mariadb-server \
+                default-libmysqlclient-dev
 
-### Install some required packages.
-RUN DEBIAN_FRONTEND=noninteractive \
+### Start the mysql server && install some required packages
+### noninteractive is required in order to avoid postfix prompts
+RUN /etc/init.d/mysql start && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get -y install \
         build-essential git autotools-dev cdbs debhelper \
         dh-autoreconf dpkg-dev gettext libev-dev libpcre3-dev \
-        libudns-dev pkg-config fakeroot libmysqlclient-dev \
-        postfix postfix-mysql apache2 bind9 phpmyadmin tor
+        libudns-dev pkg-config fakeroot phpmyadmin tor \
+        postfix postfix-pcre postfix-mysql apache2 bind9 systemd-sysv devscripts
 
-#COPY config/postfix.init.d /etc/init.d/postfix
+### Run configuration scripts
+COPY scripts/cfg/ /
+COPY src/ /src
+COPY dockercfg.sh /
+COPY init.sh /
 
+RUN chmod 775 dockercfg.sh init.sh && ./dockercfg.sh
 
+### Give permission to anyone to run add-dovecot-user. This is needed because
+### the script is executed from within PHP.
+RUN echo 'www-data ALL=(ALL) NOPASSWD: /usr/lib/cgi-bin/add-dovecot-user.sh' | EDITOR='tee -a' visudo
+
+### Setup Bind9 to use seperate logs
+COPY scripts/bind/* /etc/bind/named.conf.log
+RUN echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+RUN mkdir /var/log/bind && chown bind:bind /var/log/bind && \
+          service bind9 restart
+
+CMD ./init.sh
+EXPOSE 80 443 53 6565
